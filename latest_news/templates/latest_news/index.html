@@ -14,19 +14,23 @@
   </head>
   <body>
     <h1>{{ content }}</h1>
-    {% for order in orders %}
-    <h3>{{ order.title }}</h3>
-    <p>{{ order.created_at }}</p>
-    <p>{{ order.content }}</p>
+
+    <div class="container">
+        <a class="btn btn-primary" href="{% url 'sender' %}" role="button">Link</a>
+        {% for order in orders %}
+        <h3>{{ order.title }}</h3>
+        <p>{{ order.created_at }}</p>
+        <p>{{ order.content }}</p>
+            {% if order.file %}
+        <span>{{ order.file.url }}</span>
+            {% endif %}
+    {% comment %}
         {% if order.file %}
-    <span>{{ order.file.url }}</span>
+        <img src="{{ order.file.url }}" width="300" height="200">
         {% endif %}
-{% comment %}
-    {% if order.file %}
-    <img src="{{ order.file.url }}" width="300" height="200">
-    {% endif %}
-{% endcomment %}
-    {% endfor %}
+    {% endcomment %}
+        {% endfor %}
+        </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
