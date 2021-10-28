@@ -1,9 +1,23 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .models import News, Category
+
 
 def index(request):
-    return HttpResponse('<h1>Hello</h1>')
+    orders = News.objects.all()
+    context = {
+        'title': 'Перечень распоряжений',
+        'content': 'content',
+        'orders': orders,
+    }
+    return render(request, 'latest_news/index.html', context)
+
 
 def sender(request):
-    return HttpResponse('<h1>Fax Page</h1>')
+    context = {
+        'sender_title': 'sender_title',
+        'sender_content': 'sender_content',
+        'sender_body': 'sender_body',
+    }
+    return render(request, 'email_sender/send.html', context)
