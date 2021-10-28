@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'latest_news',
+    'email_sender',
 ]
 
 MIDDLEWARE = [
