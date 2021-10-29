@@ -129,6 +129,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'latest_news/static'),
+    os.path.join(BASE_DIR, 'email_sender/static'),
 ]
 
 MEDIA_ROOT = BASE_DIR / 'media'

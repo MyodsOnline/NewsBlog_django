@@ -6,21 +6,33 @@
 {% endblock %}
 
 {% block body %}
-  <h1>{{ content }}</h1>
-    <div class="container">
-        <a class="btn btn-primary" href="{% url 'sender' %}" role="button">Link</a>
-        {% for order in orders %}
-        <h3>{{ order.title }}</h3>
-        <p>{{ order.created_at }}</p>
-        <p>{{ order.content }}</p>
-            {% if order.file %}
-        <span>{{ order.file.url }}</span>
-            {% endif %}
+   {% for order in orders %}
+<div class="card-upd mt-2">
+    <h6 class="card-header">
+        {{ order.category }}
+         |||
+        {% if order.slug %}
+            {{ order.slug }}
+        {% else %}
+            Featured
+        {% endif %}
+    </h6>
+    <div class="card-body">
+        <h5 class="card-title">{{ order.title }} ||| {{ order.created_at }}</h5>
+        <p class="card-text">{{ order.content }}</p>
+        <a href="#" class="btn btn-light">Go somewhere</a>
+    </div>
+    {% if order.file %}
+    <div class="text-muted card-footer-upd">
+        {{ order.file.url }}
+    </div>
+    {% endif %}
+</div>
+    {% endfor %}
     {% comment %}
         {% if order.file %}
         <img src="{{ order.file.url }}" width="300" height="200">
         {% endif %}
     {% endcomment %}
-        {% endfor %}
-        </div>
+
 {% endblock %}
