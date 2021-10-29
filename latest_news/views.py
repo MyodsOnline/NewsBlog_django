@@ -7,8 +7,8 @@ from .models import News, Category
 def index(request):
     orders = News.objects.all()
     context = {
-        'title': 'Перечень распоряжений',
-        'content': 'content',
+        'title': 'Order list',
+        'content': 'Order list',
         'orders': orders,
     }
     return render(request, 'latest_news/index.html', context)
