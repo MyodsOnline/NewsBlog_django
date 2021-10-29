@@ -8,8 +8,8 @@
 {% block body %}
    {% for order in orders %}
 <div class="card-upd mt-2">
-    <h6 class="card-header text-white bg-dark">
-        {{ order.category }}
+    <h6 class="card-header text-white bg-secondary">
+        {{ order.category.cat_title }}
          |||
         {{ order.pk }}
          |||
@@ -21,8 +21,8 @@
     </h6>
     <div class="card-body">
         <h5 class="card-title">{{ order.title }} ||| {{ order.created_at }}</h5>
-        <p class="card-text">{{ order.content }}</p>
-        <a href="#" class="btn btn-light btn-light-upd">Go somewhere</a>
+        <p class="card-text p-upd">{{ order.content }}</p>
+        <a href="#" class="btn btn-outline-secondary btn-light-upd btn-sm">Go somewhere</a>
     </div>
     {% if order.file %}
     <div class="text-muted card-footer-upd">
