@@ -4,6 +4,7 @@ from django.utils.text import slugify
 
 
 class News(models.Model):
+    number = models.PositiveIntegerField(db_index=True, unique=True, blank=True, default=1)
     title = models.CharField(max_length=100, verbose_name='Заголовок', db_index=True)
     content = models.TextField(verbose_name='Контент')
     slug = models.SlugField(unique=True, blank=True)
