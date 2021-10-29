@@ -36,3 +36,7 @@
 .btn-light:hover{
     background-color: darkgray;
 }
+
+.btn-light-upd {
+    border: 1px solid rgba(0,0,0,.125);
+}
