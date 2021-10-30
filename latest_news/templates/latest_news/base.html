@@ -45,10 +45,10 @@
                 <a class="nav-link disabled">Disabled</a>
               </li>
             </ul>
-    {% comment Search %}
+    {% comment dropdown-menu %}
             <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <input class="form-control me-2" type="search" placeholder="{% now "Y-m-d" %}" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Date</button>
             </form>
     {% endcomment %}
           </div>
@@ -75,8 +75,15 @@
       </nav>
     {% endcomment %}
 
-    {% block body %} BLOCK_BODY {% endblock %}
     </div>
+      <div class="container mt-3">
+        <div class="row">
+    {% block item_list %} ITEM_LIST {% endblock %}
+
+    {% block body %} BLOCK_BODY {% endblock %}
+        </div>
+      </div>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
