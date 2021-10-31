@@ -14,12 +14,3 @@ def index(request):
         'categories': categories,
     }
     return render(request, 'latest_news/index.html', context)
-
-
-def sender(request):
-    context = {
-        'sender_title': 'Sender_title',
-        'sender_content': 'Email_sender',
-        'sender_body': 'sender_body',
-    }
-    return render(request, 'email_sender/send.html', context)
