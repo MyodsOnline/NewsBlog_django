@@ -1,5 +1,6 @@
 # NewsBlog_django
-Project from book
+Consist of two parts: one of them is FinFax_2.  
+Here is some explanation: [link to google.docs](https://docs.google.com/document/d/11BdJcA0ygOtYN9qwPmDViYD8HPmAdCYOSjYUj9aHjOw/edit?usp=sharing).
 
 Finfax_2 via NewsBlog  
 Есть процесс взаимодействия с диспетчерами Fingrid, организованный в настоящее время неоптимальным образом. Взаимодействие происходит посредством емэйл сообщений со вложенными файлами. Организованная база данных отсутствует, хронология ведётся в отдельном файле.

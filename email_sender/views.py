@@ -7,7 +7,7 @@ def sender(request):
     context = {
         'email': 'Sender_title',
         'sender_content': 'Email_sender',
-        'sender_body': 'sender_body',
+        'sender_body': 'sender_logs',
     }
     return render(request, 'email_sender/send.html', context)
 
