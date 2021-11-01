@@ -10,8 +10,8 @@
 <div class="col-md-2">
     <ul class="list-group mb-2">
    {% for category in categories %}
-        <a href="#" class="list-group-item bg-light list-group-item-action d-flex justify-content-between align-items-center">{{ category.cat_title }}
-            <span class="badge bg-dark rounded-pill">14</span>
+        <a href="/category/{{ category.pk }}" class="list-group-item bg-light list-group-item-action d-flex justify-content-between align-items-center">{{ category.cat_title }}
+<!--            <span class="badge bg-dark rounded-pill">{{ category.cat_title|length }}</span>-->
         </a>
     {% endfor %}
     </ul>
@@ -34,8 +34,8 @@
        <tr>
           <th scope="row">{{ order.number }}</th>
           <td>{{ order.title }}</td>
-          <td>{{ order.created_at }}</td>
-          <td>@mdo</td>
+          <td>{{ order.created_at|date:"d.m.Y _ H:i" }}</td>
+          <td>{{ order.category }}</td>
        </tr>
     {% comment for table-view-check %}
         <div class="card-upd mb-2">

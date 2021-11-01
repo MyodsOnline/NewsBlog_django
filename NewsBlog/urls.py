@@ -18,11 +18,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from latest_news.views import index
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
+    path('', include('latest_news.urls')),
     path('send/', include('email_sender.urls')),
 ]
 

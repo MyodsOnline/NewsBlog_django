@@ -1,0 +1,54 @@
+{% extends 'latest_news/base.html'%}
+{% load static %}
+
+{% block css %}
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block item_list %}
+<div class="col-md-2">
+    <ul class="list-group mb-2">
+        <a href="{% url 'index' %}" class="list-group-item bg-success list-group-item-action d-flex justify-content-between align-items-center">← Назад
+<!--            <span class="badge bg-dark rounded-pill">14</span>-->
+        </a>
+    {% comment %}
+        <a href="/category/{{ category.pk }}" class="list-group-item bg-light list-group-item-action d-flex justify-content-between align-items-center">{{ category.cat_title }}
+<!--            <span class="badge bg-dark rounded-pill">14</span>-->
+        </a>
+      {% endcomment %}
+    {% for news_itm in news %}
+        <a href="/category/{{ category.pk }}" class="list-group-item bg-light list-group-item-action d-flex justify-content-between align-items-center">{{ news_itm.number }} от {{ news_itm.created_at|date:"d.m.y" }}
+<!--            <span class="badge bg-dark rounded-pill">14</span>-->
+        </a>
+    {% endfor %}
+
+    </ul>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-10">
+    <table class="table table-striped table-hover">
+        <thead class="table-secondary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+   {% for news in news %}
+       <tr>
+          <th scope="row">{{ news.number }}</th>
+          <td>{{ news.title }}</td>
+          <td>{{ news.content }}</td>
+          <td>{{ news.is_published }}</td>
+       </tr>
+   {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
