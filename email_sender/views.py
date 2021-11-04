@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 
 from .models import Email
 
@@ -13,7 +14,7 @@ def sender(request):
 
 
 def current(request, email_id):
-    email = Email.objects.get(pk=email_id)
+    email = get_object_or_404(Email, pk=email_id)
     context = {
         'email': email,
         'title': 'Current: ' + str(email.number)

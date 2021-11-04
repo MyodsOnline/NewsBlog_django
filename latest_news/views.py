@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 
 from .models import News, Category
 
@@ -29,7 +29,7 @@ def get_category(request, category_id):
 
 
 def get_order(request, order_id):
-    order = News.objects.get(pk=order_id)
+    order = get_object_or_404(News, pk=order_id)
     return render(request, 'latest_news/order.html', {
         'order': order,
         'title': 'Orders_list/' + str(order.number),
