@@ -4,10 +4,10 @@ from .models import News, Category
 
 
 class NewsAdmin (admin.ModelAdmin):
-    list_display = ('number', 'title', 'slug', 'category', 'created_at', 'file', 'is_published',)
+    list_display = ('number', 'title', 'slug', 'category', 'created_at', 'file', 'is_published', 'is_starred')
     list_display_links = ('number', 'title',)
     search_fields = ('number', 'title', 'content', 'created_at',)
-    list_editable = ('is_published',)
+    list_editable = ('is_published', 'is_starred')
     list_filter = ('category', 'is_published',)
 
 

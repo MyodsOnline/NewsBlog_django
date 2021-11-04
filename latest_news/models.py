@@ -12,6 +12,7 @@ class News(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
     file = models.FileField(upload_to='docs/%Y/', verbose_name='Файл', blank=True)
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
+    is_starred = models.BooleanField(default=False, blank=True, verbose_name='Избранное')
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, blank=True, verbose_name='Категория')
 
     def __str__(self):
