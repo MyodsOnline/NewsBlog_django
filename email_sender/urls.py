@@ -4,5 +4,5 @@ from email_sender.views import sender, current
 
 urlpatterns = [
     path('', sender, name='sender'),
-    path('test/', current, name='current'),
+    path('email/<int:email_id>', current, name='current'),
 ]

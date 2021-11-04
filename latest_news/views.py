@@ -26,3 +26,11 @@ def get_category(request, category_id):
         'category': category,
         'content': 'Orders_list/' + category.cat_title,
     })
+
+
+def get_order(request, order_id):
+    order = News.objects.get(pk=order_id)
+    return render(request, 'latest_news/order.html', {
+        'order': order,
+        'title': 'Orders_list/' + str(order.number),
+    })

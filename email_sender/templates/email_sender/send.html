@@ -76,38 +76,20 @@
                 </tr>
               </thead>
               <tbody>
+                {% for email_itm in email %}
                 <tr>
-                    <td><a href="/">46</a></td>
-                    <td>29.10.21</td>
-                    <td>18:42</td>
-                    <td class="bis">D354 E456 D354 E456 _ M2</td>
-                    <td><a href="uploads/Image_1.png" target="_blank">uploads/Image_1.png</a></td>
-                    <td>Kuznetsov</td>
+                    <td><a href="{{ email_itm.get_absolute_url }}" target="_blank">{{ email_itm.number }}</a></td>
+                    <td>{{ email_itm.date|date:'d.m.y' }}</td>
+                    <td>{{ email_itm.time }}</td>
+                    <td class="bis">{{ email_itm.text }}</td>
+                    <td>
+                        {% if email_itm.file %}
+                        <a href="/">{{ email_itm.file }}</a>
+                        {% endif %}
+                    </td>
+                    <td>{{ email_itm.author }}</td>
                 </tr>
-                <tr>
-                    <td><a href="/">44</a></td>
-                    <td>27.10.21</td>
-                    <td>21:39</td>
-                    <td class="bis">Test</td>
-                    <td><a href="uploads/Image11_6fW7tUw.png" target="_blank">uploads/Image11_6fW7tUw.png</a></td>
-                    <td>Kuznetsov</td>
-                </tr>
-                <tr>
-                    <td><a href="/">42</a></td>
-                    <td>27.10.21</td>
-                    <td>20:24</td>
-                    <td class="bis">Image test_2</td>
-                    <td><a href="uploads/Image11.png" target="_blank">uploads/Image11.png</a></td>
-                    <td>Kuznetsov</td>
-                </tr>
-                <tr>
-                    <td><a href="/">26</a></td>
-                    <td>29.07.21</td>
-                    <td>00:44</td>
-                    <td class="bis">D354 E456 M3 — M4!</td>
-                    <td><a href="" target="_blank"></a></td>
-                    <td>Kuznetsov</td>
-                </tr>
+                {% endfor %}
               </tbody>
             </table>
 
