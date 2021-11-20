@@ -10,7 +10,7 @@
 <div class="col-md-2">
     <ul class="list-group mb-2">
    {% for category in categories %}
-        <a href="/category/{{ category.pk }}" class="list-group-item bg-light list-group-item-action d-flex justify-content-between align-items-center">{{ category.cat_title }}
+        <a href= "{{ category.get_absolute_url }}" class="list-group-item bg-light list-group-item-action d-flex justify-content-between align-items-center">{{ category.cat_title }}
 <!--            <span class="badge bg-dark rounded-pill">{{ category.cat_title|length }}</span>-->
         </a>
     {% endfor %}
@@ -32,7 +32,7 @@
         <tbody>
    {% for order in orders %}
        <tr>
-          <th scope="row">{{ order.number }}</th>
+          <th scope="row"><a href="{{ order.get_absolute_url }}">{{ order.number }}</a></th>
           <td>{{ order.title }}</td>
           <td>{{ order.created_at|date:"d.m.Y _ H:i" }}</td>
           <td>{{ order.category }}</td>

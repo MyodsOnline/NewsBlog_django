@@ -1,5 +1,5 @@
 import datetime
-
+from django.urls import reverse
 from django.db import models
 
 
@@ -15,6 +15,9 @@ class Email(models.Model):
 
     def __str__(self):
         return f'{self.number}'
+
+    def get_absolute_url(self):
+        return reverse('current', kwargs={'email_id': self.pk})
 
     class Meta:
         verbose_name = 'email'

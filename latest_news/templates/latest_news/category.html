@@ -13,14 +13,16 @@
 <!--            <span class="badge bg-dark rounded-pill">14</span>-->
         </a>
     {% comment %}
-        <a href="/category/{{ category.pk }}" class="list-group-item bg-light list-group-item-action d-flex justify-content-between align-items-center">{{ category.cat_title }}
+        <a href="{{ category.get_absolute_url }}" class="list-group-item bg-light list-group-item-action d-flex justify-content-between align-items-center">{{ category.cat_title }}
 <!--            <span class="badge bg-dark rounded-pill">14</span>-->
         </a>
       {% endcomment %}
     {% for news_itm in news %}
+        {% if news_itm.is_starred == True %}
         <a href="/category/{{ category.pk }}" class="list-group-item bg-light list-group-item-action d-flex justify-content-between align-items-center">{{ news_itm.number }} от {{ news_itm.created_at|date:"d.m.y" }}
 <!--            <span class="badge bg-dark rounded-pill">14</span>-->
         </a>
+        {% endif %}
     {% endfor %}
 
     </ul>
@@ -41,10 +43,10 @@
         <tbody>
    {% for news in news %}
        <tr>
-          <th scope="row">{{ news.number }}</th>
-          <td>{{ news.title }}</td>
-          <td>{{ news.content }}</td>
-          <td>{{ news.is_published }}</td>
+           <th scope="row"><a href="{{ news.get_absolute_url }}">{{ news.number }}</a></th>
+           <td>{{ news.title }}</td>
+           <td>{{ news.content }}</td>
+           <td>{{ news.is_published }}</td>
        </tr>
    {% endfor %}
         </tbody>

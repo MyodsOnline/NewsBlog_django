@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import News, Category
+from .forms import OrderForm
 
 
 def index(request):
@@ -25,4 +25,28 @@ def get_category(request, category_id):
         'categories': categories,
         'category': category,
         'content': 'Orders_list/' + category.cat_title,
+    })
+
+
+def get_order(request, order_id):
+    order = get_object_or_404(News, pk=order_id)
+    return render(request, 'latest_news/order.html', {
+        'order': order,
+        'title': 'Orders_list/' + str(order.number),
+    })
+
+
+def add_order(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST, request.FILES)
+        if form.is_valid():
+            order = form.save()
+            return redirect(index)
+    else:
+        form = OrderForm()
+    categories = Category.objects.all()
+    return render(request, 'latest_news/add_order.html', {
+        'content': 'Add_order',
+        'categories': categories,
+        'form': form,
     })
