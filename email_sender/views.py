@@ -13,10 +13,13 @@ def sender(request):
     else:
         form = EmailForm()
     email = Email.objects.all()
+    next_number = int(str(Email.objects.latest('number'))) + 2
     context = {
+        'sender_title': 'ex.FinFax',
         'sender_content': 'Email_sender',
         'email': email,
         'form': form,
+        'next': next_number,
     }
     return render(request, 'email_sender/send.html', context)
 
