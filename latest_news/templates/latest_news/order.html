@@ -13,7 +13,8 @@
 <div class="card mt-3">
   <h5 class="card-header">Order № {{ order.number }} от {{ order.created_at|date:"d.m.y h:m" }}</h5>
   <div class="card-body pb-1">
-    <h3 class="card-title">{{ order.content }}</h3>
+    <h2 class="card-title">{{ order.title }}</h2>
+    <h4 class="card-title">{{ order.content }}</h4>
     <h5 class="card-text">{{ order.category }}</h5>
     <h5 class="card-text">
       {% if order.file %}

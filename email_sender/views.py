@@ -1,14 +1,22 @@
-from django.shortcuts import render
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Email
+from .forms import EmailForm
 
 
 def sender(request):
+    if request.method == 'POST':
+        form = EmailForm(request.POST, request.FILES)
+        if form.is_valid():
+            email_save = form.save()
+            return redirect(sender)
+    else:
+        form = EmailForm()
     email = Email.objects.all()
     context = {
         'sender_content': 'Email_sender',
         'email': email,
+        'form': form,
     }
     return render(request, 'email_sender/send.html', context)
 

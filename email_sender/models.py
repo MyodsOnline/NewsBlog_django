@@ -23,3 +23,5 @@ class Email(models.Model):
         verbose_name = 'email'
         verbose_name_plural = 'emails'
         ordering = ['-number']
+
+
