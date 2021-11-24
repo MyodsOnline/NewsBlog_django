@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator
 
 from .models import News, Category
 from .forms import OrderForm
@@ -6,12 +7,16 @@ from .forms import OrderForm
 
 def index(request):
     orders = News.objects.all()
+    paginator = Paginator(orders, 5)
+    page_num = request.GET.get('page', 1)
+    page_objects = paginator.get_page(page_num)
     categories = Category.objects.all()
     context = {
         'title': 'Order_list',
         'content': 'Orders_list',
         'orders': orders,
         'categories': categories,
+        'page_obj': page_objects,
     }
     return render(request, 'latest_news/index.html', context)
 
@@ -40,6 +45,7 @@ def add_order(request):
     if request.method == 'POST':
         form = OrderForm(request.POST, request.FILES)
         if form.is_valid():
+
             order = form.save()
             return redirect(index)
     else:
