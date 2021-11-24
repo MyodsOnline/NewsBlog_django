@@ -13,34 +13,36 @@
 {% block body %}
 
               <div class="container bg-light magic col-md-9">
-                <form>
+                <form action="{% url 'sender' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.non_filed.errors }}
                     <div class="row mt-2">
                         <div class="col-3">
-                            <label for="exampleInputEmail1" class="form-label mb-0 fw-bold">Номер:</label>
-                            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <label for="{{ form.number.id_for_label }}" class="form-label mb-0 fw-bold">Номер {{ next }}:</label>
+                            {{ form.number }}
                         </div>
                         <div class="col-3">
                         </div>
                         <div class="col-3">
-                            <label for="exampleInputPassword1" class="form-label mb-0 fw-bold">Дата:</label>
-                            <input type="date" class="form-control" id="exampleInputPassword1">
+                            <label for="{{ form.date.id_for_label }}" class="form-label mb-0 fw-bold">Дата:</label>
+                            {{ form.date }}
                         </div>
                         <div class="col-3">
-                            <label for="exampleInputPassword1" class="form-label mb-0 fw-bold">Время:</label>
-                            <input type="time" class="form-control" id="exampleInputPassword1">
+                            <label for="{{ form.time.id_for_label }}" class="form-label mb-0 fw-bold">Время:</label>
+                            {{ form.time }}
                         </div>
                     </div>
-                    <div class="mb-1">
-                        <label for="exampleFormControlTextarea1" class="form-label mb-0 mt-1">Текст:</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <div class="mb-3">
+                        <label for="{{ form.text.id_for_label }}" class="form-label mb-0 mt-1">Текст:</label>
+                        {{ form.text }}
                     </div>
                     <div class="mb-1">
-                        <label for="formFile" class="form-label mb-0">Файл:</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <label for="{{ form.file.id_for_label }}" class="form-label mb-0">Файл:</label>
+                        {{ form.file }}
                     </div>
                     <div class="mb-1">
-                        <label for="AuthorName" class="form-label mb-0 fw-bold">Автор:</label>
-                        <input class="form-control" type="text" id="AuthorName" aria-label="default input example">
+                        <label for="{{ form.author.id_for_label }}" class="form-label mb-0 fw-bold">Автор:</label>
+                        {{ form.author }}
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label mb-0">Адрес рассылки:</label>
@@ -50,7 +52,7 @@
                         </div>
                     </div>
                     <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-secondary" type="button">Сохранить и отправить</button>
+                        <button class="btn btn-secondary" type="submit">Сохранить и отправить</button>
                     </div>
 
                 {% comment %}

@@ -1,14 +1,25 @@
-from django.shortcuts import render
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Email
+from .forms import EmailForm
 
 
 def sender(request):
+    if request.method == 'POST':
+        form = EmailForm(request.POST, request.FILES)
+        if form.is_valid():
+            email_save = form.save()
+            return redirect(sender)
+    else:
+        form = EmailForm()
     email = Email.objects.all()
+    next_number = int(str(Email.objects.latest('number'))) + 2
     context = {
+        'sender_title': 'ex.FinFax',
         'sender_content': 'Email_sender',
         'email': email,
+        'form': form,
+        'next': next_number,
     }
     return render(request, 'email_sender/send.html', context)
 
