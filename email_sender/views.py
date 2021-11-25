@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import EmailMessage
 
 from .models import Email
 from .forms import EmailForm
@@ -12,21 +12,18 @@ def sender(request):
         form = EmailForm(request.POST, request.FILES)
         if form.is_valid():
             email_save = form.save()
+            """ Sending email with attachment """
+            email_number = request.POST.get('number', '')
+            email_date = request.POST.get('date', '')
+            email_time = request.POST.get('time', '')
+            email_text = request.POST.get('text', '')
+            email_author = request.POST.get('author', '')
+            email = EmailMessage(email_number, email_text, settings.EMAIL_HOST_USER, ['diver.vlz@gmail.com'])
 
-            email_text = request.POST.get('text')
-            email_author = request.POST.get('author')
-            email_date = request.POST.get('date')
-            email_time = request.POST.get('time')
-            email_number = request.POST.get('number')
-            email_title = f'Email from SO of North-West #{email_number}'
-            content = f'{email_date} {email_time} / {email_number}\n\n' \
-                      f'{email_text}\nBest regards, {email_author}.'
+            email_file = request.FILES['file']
+            email.attach(email_file.name, email_file.read(), email_file.content_type)
 
-            send_mail(email_title,
-                      content,
-                      settings.EMAIL_HOST_USER,
-                      ['diver.vlz@gmail.com'],
-                      fail_silently=False,)
+            email.send()
 
             return redirect(sender)
     else:
