@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.conf import settings
 
 from .models import Email
 from .forms import EmailForm
-from NewsBlog import settings
 
 
 def sender(request):
@@ -12,16 +14,35 @@ def sender(request):
         form = EmailForm(request.POST, request.FILES)
         if form.is_valid():
             email_save = form.save()
+
             """ Sending email with attachment """
             email_number = request.POST.get('number', '')
             email_date = request.POST.get('date', '')
             email_time = request.POST.get('time', '')
             email_text = request.POST.get('text', '')
             email_author = request.POST.get('author', '')
-            email = EmailMessage(email_number, email_text, settings.EMAIL_HOST_USER, ['diver.vlz@gmail.com'])
+            email_title = f'Email from SO North-West #{email_number}'
 
-            email_file = request.FILES['file']
-            email.attach(email_file.name, email_file.read(), email_file.content_type)
+            html_content = render_to_string('email_sender/email_tmpl.html', {
+                'title': email_title,
+                'date_time': f'Moscow time: {email_time}  /  {email_date}',
+                'email_number': f'Message # {email_number}',
+                'email_text': email_text,
+                'email_author': email_author,
+            })
+            txt_content = strip_tags(html_content)
+
+            email = EmailMultiAlternatives(
+                email_title,
+                txt_content,
+                settings.EMAIL_HOST_USER,
+                ['diver.vlz@gmail.com']
+            )
+            email.attach_alternative(html_content, 'text/html')
+
+            if request.FILES:
+                email_file = request.FILES['file']
+                email.attach(email_file.name, email_file.read(), email_file.content_type)
 
             email.send()
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <div>
+        <center><img src="https://www.so-ups.ru/fileadmin/files/graph/flags/so-ups125x125.jpg" alt="logo SO UPS"></center>
+        <h1 style="margin-bottom: 3px;">{{ date_time }}</h1>
+        <h1 style="margin-top: 3px;">{{ email_number }}</h1>
+        <br>
+        {% if email_text %}
+            <h2>{{ email_text }}</h2>
+        {% else %}
+            please look at the attached file
+        {% endif %}
+        <br>
+        <h2>Best regards, {{ email_author }}</h2>
+    </div>
+</body>
+</html>
