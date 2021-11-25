@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
+from django.core.mail import send_mail, EmailMessage
 
 from .models import Email
 from .forms import EmailForm
+from NewsBlog import settings
 
 
 def sender(request):
@@ -10,6 +12,22 @@ def sender(request):
         form = EmailForm(request.POST, request.FILES)
         if form.is_valid():
             email_save = form.save()
+
+            email_text = request.POST.get('text')
+            email_author = request.POST.get('author')
+            email_date = request.POST.get('date')
+            email_time = request.POST.get('time')
+            email_number = request.POST.get('number')
+            email_title = f'Email from SO of North-West #{email_number}'
+            content = f'{email_date} {email_time} / {email_number}\n\n' \
+                      f'{email_text}\nBest regards, {email_author}.'
+
+            send_mail(email_title,
+                      content,
+                      settings.EMAIL_HOST_USER,
+                      ['diver.vlz@gmail.com'],
+                      fail_silently=False,)
+
             return redirect(sender)
     else:
         form = EmailForm()
