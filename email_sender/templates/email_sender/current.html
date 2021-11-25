@@ -14,7 +14,12 @@
   <h5 class="card-header">Сообщение № {{ email.number }} от {{ email.date|date:"d.m.y" }} {{ email.time }}</h5>
   <div class="card-body pb-1">
     <h3 class="card-title">{% if email.text != None %}{{ email.text }}{% endif %}</h3>
-    <h3 class="card-title">{% if email.file != None %}{{ email.file }}{% endif %}</h3>
+    <h5 class="card-text">
+      {% if email.file %}
+      Отправлен файл:
+      <a href="{{ email.file.url }}" class="card-title">{{ email.file }}</a><br>
+      {% endif %}
+    </h5>
     <h5 class="card-text">{{ email.author }}</h5>
     <div class="alert alert-secondary row mt-4 mb-0">
 
