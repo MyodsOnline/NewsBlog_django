@@ -25,8 +25,9 @@ def sender(request):
 
             html_content = render_to_string('email_sender/email_tmpl.html', {
                 'title': email_title,
-                'date_time': f'Moscow time: {email_time}  /  {email_date}',
-                'email_number': f'Message # {email_number}',
+                'email_date': email_date,
+                'email_time': email_time,
+                'email_number': email_number,
                 'email_text': email_text,
                 'email_author': email_author,
             })
@@ -36,13 +37,14 @@ def sender(request):
                 email_title,
                 txt_content,
                 settings.EMAIL_HOST_USER,
-                ['diver.vlz@gmail.com']
+                ['diver.vlz@gmail.com'],
+                reply_to=['diver.vlz@yandex.ru']
             )
             email.attach_alternative(html_content, 'text/html')
 
             if request.FILES:
                 email_file = request.FILES['file']
-                email.attach(email_file.name, email_file.read(), email_file.content_type)
+                email.attach(email_file.name, email_file.read(), 'application/pdf')
 
             email.send()
 

@@ -20,6 +20,6 @@ class EmailForm(forms.ModelForm):
             'date': DateInput(attrs={'class': 'form-control'}),
             'time': TimeInput(attrs={'class': 'form-control'}),
             'text': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'file': forms.FileInput(),
+            'file': forms.ClearableFileInput(),
             'author': forms.TextInput(attrs={'class': 'form-control'}),
         }
