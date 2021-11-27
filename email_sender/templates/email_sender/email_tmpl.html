@@ -5,18 +5,46 @@
     <title>{{ title }}</title>
 </head>
 <body>
-    <div>
-        <center><img src="https://www.so-ups.ru/fileadmin/files/graph/flags/so-ups125x125.jpg" alt="logo SO UPS"></center>
-        <h1 style="margin-bottom: 3px;">{{ date_time }}</h1>
-        <h1 style="margin-top: 3px;">{{ email_number }}</h1>
-        <br>
-        {% if email_text %}
-            <h2>{{ email_text }}</h2>
-        {% else %}
-            please look at the attached file
-        {% endif %}
-        <br>
-        <h2>Best regards, {{ email_author }}</h2>
-    </div>
+    <center>
+    <table width="600px" style="border-collapse:collapse; border-spacing:0; height: auto; border: 1px solid #a5a2a2;">
+        <tbody>
+            <tr>
+                <td rowspan="3">
+                    <center><img src="https://www.so-ups.ru/fileadmin/files/graph/flags/so-ups125x125.jpg" alt="logo SO UPS" style="margin: 5px 0px;"></center>
+                </td>
+                <td><h3 style="margin: 5px 0px">Date: {{ email_date }}</h3></td>
+            </tr>
+            <tr>
+                <td><h3 style="margin: 5px 0px">Moscow time: {{ email_time }}</h3></td>
+            </tr>
+            <tr>
+                <td><h3 style="margin: 5px 0px">Email № {{ email_number }}</h3></td>
+            </tr>
+            <tr style="background: #e7e2e2; margin-top: 15px;">
+                <td colspan="2" style="padding: 30px 15px;">
+                    {% if email_text %}
+                       <h2> {{ email_text }}</h2>
+                    {% else %}
+                        <h2>please look at the attached file</h2>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr style="background: #e7e2e2; padding-bottom: 15px;">
+                <td colspan="2" style="padding: 0px 15px;">
+                    <h3>Best regards,<br>{{ email_author }}</h3>
+                </td>
+            </tr>
+ <!--           
+            <tr>
+                <td colspan="2" style="margin-top: 15px;">
+                    <center>
+                        <a href="mailto:diver.vlz@yandex.ru" style="padding: 7px 15px; background: #234587; text-decoration: none;">Reply_to_button</a>
+                    </center>
+                </td>
+            </tr>
+-->
+        </tbody>
+    </table>
+    </center>
 </body>
 </html>
