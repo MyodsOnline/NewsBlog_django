@@ -44,7 +44,7 @@
                 <tr style="background: #e9e7e7; margin-top: 15px;">
                     <td colspan="2" style="padding: 30px 15px;">
                         {% if email_text %}
-                           <h2> {{ email_text }}</h2>
+                           <h2> {{ email_text|linebreaks }}</h2>
                         {% else %}
                             <h2>please look at the attached file</h2>
                         {% endif %}
