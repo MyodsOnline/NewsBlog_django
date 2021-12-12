@@ -7,9 +7,10 @@ class Email(models.Model):
     number = models.PositiveIntegerField(db_index=True, unique=True, verbose_name='Email number')
     date = models.DateField(default=datetime.date.today, verbose_name='Date')
     time = models.TimeField(verbose_name='Time')
-    text = models.CharField(max_length=100, blank=True, null=True, verbose_name='Text')
+    text = models.TextField(blank=True, null=True, verbose_name='Text')
     file = models.FileField(upload_to='docs/%Y/', blank=True, verbose_name='File')
     author = models.CharField(max_length=100, verbose_name='Author')
+    email = models.EmailField(default='diver.vlz@gmail.com', verbose_name='Email')
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name='Created_at')
     is_ok = models.BooleanField(default=False, verbose_name='Is_ok?')
 

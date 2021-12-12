@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic.edit import UpdateView
 from django.core.paginator import Paginator
 
 from .models import News, Category
@@ -56,3 +57,9 @@ def add_order(request):
         'categories': categories,
         'form': form,
     })
+
+
+class OrderUpdateView(UpdateView):
+    model = News
+    template_name = 'latest_news/get_order.html'
+    fields = ['number', 'title', 'is_published', 'is_starred']

@@ -1,0 +1,22 @@
+{% extends 'email_sender/base.html'%}
+{% load static %}
+
+{% block css %}
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block name %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+<div class="col-md-10">
+    <h1>Edit post</h1>
+        <form method="post">
+        {% csrf_token %}
+        {{ form.non_filed.errors }}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-block">Обновить</button>
+        </form>
+</div>
+{% endblock %}
