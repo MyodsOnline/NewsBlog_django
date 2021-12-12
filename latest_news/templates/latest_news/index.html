@@ -27,45 +27,24 @@
               <th scope="col">First</th>
               <th scope="col">Last</th>
               <th scope="col">Handle</th>
+              <th scope="col">Is_ok?</th>
             </tr>
         </thead>
         <tbody>
    {% for order in page_obj.object_list %}
        <tr>
-          <th scope="row"><a href="{{ order.get_absolute_url }}">{{ order.number }}</a></th>
-          <td>{{ order.title }}</td>
-          <td>{{ order.created_at|date:"d.m.Y _ H:i" }}</td>
-          <td>
+<!--          <th scope="row"><a href="{{ order_edit.get_absolute_url }}">{{ order.number }}</a></th>-->
+            <th scope="row"><a href="{% url 'order_edit' order.pk %}">{{ order.number }}</a></th>
+            <td>{{ order.title }}</td>
+            <td>{{ order.created_at|date:"d.m.Y" }}</td>
+            <td>
               {% if order.file %}
-              <a href="{{ order.file }}" target="_blank">{{ order.file.url }}</a>
+              <a href="{{ order.file }}" target="_blank">{{ order.file.url|truncatechars:10 }}</a>
               {% endif %}
-          </td>
+            </td>
+            <td>{% if order.is_starred %}<img src="static/vendor/OIP.jpg" width="30px">{% endif %}</td>
        </tr>
-    {% comment for table-view-check %}
-        <div class="card-upd mb-2">
-        <h6 class="card-header text-white bg-secondary">
-            {{ order.category.cat_title }}
-             |||
-            {{ order.number }}
-             |||
-            {% if order.slug %}
-                {{ order.slug }}
-            {% else %}
-                Featured
-            {% endif %}
-        </h6>
-        <div class="card-body">
-            <h5 class="card-title">{{ order.title }} ||| {{ order.created_at }}</h5>
-            <p class="card-text p-upd">{{ order.content }}</p>
-            <a href="#" class="btn btn-outline-secondary btn-light-upd btn-sm">Go somewhere</a>
-        </div>
-        {% if order.file %}
-        <div class="text-muted card-footer-upd">
-            {{ order.file.url }}
-        </div>
-        {% endif %}
-        {% endcomment %}
-    </div>
+
     {% endfor %}
         </tbody>
     </table>
