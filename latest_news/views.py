@@ -63,3 +63,4 @@ class OrderUpdateView(UpdateView):
     model = News
     template_name = 'latest_news/get_order.html'
     fields = ['number', 'title', 'is_published', 'is_starred']
+    success_url = '/'

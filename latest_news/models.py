@@ -22,9 +22,9 @@ class News(models.Model):
         if not self.slug:
             self.slug = slugify(str(self.title))
         super().save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        return reverse('order', kwargs={'order_id': self.pk})
+    #
+    # def get_absolute_url(self):
+    #     return reverse('order_edit', kwargs={'order_number': self.number})
 
     class Meta:
         verbose_name = 'Распрояжение'
